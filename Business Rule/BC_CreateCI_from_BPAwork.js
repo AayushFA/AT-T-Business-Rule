@@ -1,0 +1,56 @@
+/*===== export metadata =====
+{
+  "contextId" : "Context1",
+  "workspaceId" : "Main"
+}
+*/
+/*===== business rule definition =====
+{
+  "id" : "BC_CreateCI_from_BPAwork",
+  "type" : "BusinessCondition",
+  "setupGroups" : [ "BPA_BC" ],
+  "name" : "Check Create CI from BPAworkf",
+  "description" : null,
+  "scope" : "Global",
+  "validObjectTypes" : [ "LE_Contract_Item_Child", "Contract_Item", "BPA" ],
+  "allObjectTypesValid" : false,
+  "runPrivileged" : true,
+  "onApprove" : "Never",
+  "dependencies" : [ ]
+}
+*/
+/*===== business rule plugin definition =====
+{
+  "pluginId" : "JavaScriptBusinessConditionWithBinds",
+  "binds" : [ {
+    "contract" : "CurrentObjectBindContract",
+    "alias" : "node",
+    "parameterClass" : "null",
+    "value" : null,
+    "description" : null
+  }, {
+    "contract" : "ManagerBindContract",
+    "alias" : "manager",
+    "parameterClass" : "null",
+    "value" : null,
+    "description" : null
+  } ],
+  "messages" : [ ],
+  "pluginType" : "Operation"
+}
+*/
+exports.operation0 = function (node,manager) {
+//author:-AW240U(COGNIZANT)
+	
+
+var objectType = node.getObjectType().getID();
+
+if (objectType == 'Contract_Item') {
+	var tempPar = node.getValue("Temp_Parent_Item").getSimpleValue();
+	if(tempPar){
+		return true
+	}else{
+		return false
+	}
+}
+}
